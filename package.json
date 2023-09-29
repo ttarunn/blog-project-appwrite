@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
-    "@tinymce/tinymce-react": "github:tinymce/tinymce-react",
+    "@tinymce/tinymce-react": "^4.3.0",
     "appwrite": "^13.0.0",
     "html-react-parser": "^4.2.2",
     "react": "^18.2.0",

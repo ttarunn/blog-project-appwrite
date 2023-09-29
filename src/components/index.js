@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Container from "./container/Container";
 import Button from "./Button";
 import Input from "./Input";
+import RealTimeEditor from "./RealTimeEditor";
 export {
     Header,
     Footer,
@@ -12,5 +13,6 @@ export {
     Logo,
     Container,
     Button,
-    Input
+    Input,
+    RealTimeEditor,
 }

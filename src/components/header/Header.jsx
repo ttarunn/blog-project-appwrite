@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const authStatus = useSelector((store)=> store.authentication.status);
+  const authStatus = useSelector((store)=> store.authSlice.status);
   const navigate = useNavigate();
   const navItems = [
     {
