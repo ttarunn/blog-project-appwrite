@@ -66,7 +66,7 @@ function PostForm({post}) {
         }
     }, [watch, slugTransform, setValue])
   return (
-    <form onSubmit={submit} className='flex flex-wrap'>
+    <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
         <div className='w-2/3 px-2'>
             <Input 
                 label='Title: '
@@ -100,7 +100,7 @@ function PostForm({post}) {
             type="file"
             className="mb-4"
             accept="image/png, image/jpg, jpeg, image/gif"
-            {...register, ("image", {required:true})}
+            {...register("image", {required:true})}
             />
             {post && (
                 <div className='w-full mb-4'>
