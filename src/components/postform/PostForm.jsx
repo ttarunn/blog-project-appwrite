@@ -39,13 +39,13 @@ function PostForm({post}) {
             if(file){
                 
                 const fileId = file.$id;
-                
+                console.log(userData)
                 data.featuredImg = fileId;
                 const dbPost = await service.createPost({
                     ...data,
                     userId: userData.$id
                 });
-                console.log(dbPost)
+                
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
                 }
