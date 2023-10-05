@@ -15,7 +15,7 @@ export class Service {
         this.storage = new Storage(this.client);
     };
 
-    async createPost({title, content, slug, featuredImage, userID, status}){
+    async createPost({title, content, slug, featuredImg, userId, status}){
         try {
             return await this.database.createDocument(
                 config.appwriteDatabaseID, 
@@ -24,9 +24,9 @@ export class Service {
                 {
                     title,
                     content,
-                    featuredImage,
+                    featuredImg,
                     status,
-                    userID
+                    userId
                 }
             )
         } catch (error) {
@@ -34,7 +34,7 @@ export class Service {
         }
     };
 
-    async updatePost(slug, {title, content, featuredImage, status}){
+    async updatePost(slug, {title, content, featuredImg, status}){
         try {
             return await this.database.updateDocument(
                 config.appwriteDatabaseID,
@@ -43,7 +43,7 @@ export class Service {
                 {
                     title,
                     content,
-                    featuredImage,
+                    featuredImg,
                     status
                 }
             )
@@ -57,7 +57,7 @@ export class Service {
     async deletePost(slug){
         try {
             await this.database.deleteDocument(
-                conf.appwriteDatabaseID,
+                config.appwriteDatabaseID,
                 config.appwriteCollectionID,
                 slug
             )

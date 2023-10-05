@@ -6,10 +6,10 @@ import Container from "./container/Container";
 import Button from "./Button";
 import Input from "./Input";
 import RealTimeEditor from "./RealTimeEditor";
-import Signup from "./Signup";
+import Signup from "./Signup.jsx";
 import PostCard from "./PostCard";
 import AuthLayout from "./AuthLayout";
-import Login from "./Login";
+import Login from "./Login.jsx";
 import PostForm from "./postform/PostForm";
 import Select from "./Select"
 export {

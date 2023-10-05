@@ -19,43 +19,49 @@ function PostForm({post}) {
     const userData = useSelector(store => store.authSlice.userData);
 
     const submit = async(data)=> {
+        
         if(post){
-            const file = data.image[0] ? service.uploadFile(data.image[0]) : null
+            
+            const file = data.image[0] ? await service.uploadFile(data.image[0]) : null
             if(file){
-                service.deleteFile(post.featuredImage)
+                service.deleteFile(post.featuredImg)
             }
             const dbPost = await service.updatePost(post.$id, {
                 ...data,
-                featuredImage : file ? file.$id : undefined
+                featuredImg : file ? file.$id : undefined
             });
             if(dbPost){
                 navigate(`/post/${dbPost.$id}`)
-            }else{
-                const file = data.image[0] ? service.uploadFile(data.image[0]) : null
-                if(file){
-                    const fileId = file.$id;
-                    data.featuredImage = fileId;
-                    const dbPost = await service.createPost({
-                        ...data,
-                        userID: userData.$id
-                    });
-                    if(dbPost){
-                        navigate(`/post${dbPost.$id}`)
-                    }
+            }
+        }else{
+            
+            const file = data.image[0] ? await service.uploadFile(data.image[0]) : null
+            if(file){
+                
+                const fileId = file.$id;
+                
+                data.featuredImg = fileId;
+                const dbPost = await service.createPost({
+                    ...data,
+                    userId: userData.$id
+                });
+                console.log(dbPost)
+                if(dbPost){
+                    navigate(`/post/${dbPost.$id}`)
                 }
             }
         }
     };
 
     const slugTransform = useCallback((value)=> {
-        if(value && typeof value === String){
-            return value.trim().toLowerCase().replace(/^[a-zA-Z\d\s]+/g, '-').replace(/\s/g, '-')
+        if(value && typeof value === "string"){
+            return value.trim().toLowerCase().replace(/[^a-zA-Z\d\s]+/g, "-").replace(/\s/g, '-')
         };
         return ''
     }, []);
 
     useEffect(()=> {
-        const subscription = watch((value, {name})=> {
+        const subscription = watch((value, { name })=> {
             if(name === 'title'){
                 setValue('slug', slugTransform(value.title, {shouldValidate:true}))
             }
@@ -100,11 +106,11 @@ function PostForm({post}) {
             type="file"
             className="mb-4"
             accept="image/png, image/jpg, jpeg, image/gif"
-            {...register("image", {required:true})}
+            {...register("image", {required: !post})}
             />
             {post && (
                 <div className='w-full mb-4'>
-                    <img src={service.getFilePreview(post.featuredImage)} alt={post.title} className='rounded-lg'/>
+                    <img src={service.getFilePreview(post.featuredImg)} alt={post.title} className='rounded-lg'/>
                 </div>
             )}
             <Select 
@@ -115,7 +121,7 @@ function PostForm({post}) {
                 required:true
             })}
             />
-            <Button type='submit' bgColor={post? "bg-green-500" : undefined} className='w-full'>
+            <Button type="submit" bgColor={post? "bg-green-500" : undefined} className='w-full'>
                 {post ? "Update" : "Submit"}
             </Button>
         </div>
