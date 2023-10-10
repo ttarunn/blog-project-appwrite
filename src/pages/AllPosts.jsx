@@ -13,6 +13,12 @@ function AllPosts() {
         })
     }, []);
 
+    if(posts.length === 0){
+        return <div className='text-xl font-semibold'>
+            You did'nt post anything yet.
+        </div>
+    }
+
   return (
     <div className='py-8'>
         <Container>
